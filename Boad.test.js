@@ -1,5 +1,5 @@
 const Board = require('./Board');
-const Slot = require('./Slot');
+const Card = require('./Card');
 const _ = require('lodash');
 const { test } = require('@jest/globals');
 

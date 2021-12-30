@@ -1,13 +1,7 @@
 const _ = require('lodash');
+const Card = require('./Card');
 
 const cardTypes = {};
-
-class Card {
-  constructor(type = '', value = '') {
-    this.type = type;
-    this.value = value;
-  }
-}
 
 class Board {
   constructor() {
