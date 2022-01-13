@@ -87,4 +87,32 @@ describe('Slot', () => {
     slot.addCard(new Card('C', 13, 'red'));
     expect(slot.cards.length).toBe(2);
   });
+
+  // Cho phep thêm những la bai bị úp và ở dưới không được có lá bài nào ngửa
+  test('test should allow add hidden cards when there is not any revealed cards at the bottom', () => {
+    const slot = new Slot();
+    slot.addCard(new Card('A', 13, 'red', true));
+    slot.addCard(new Card('A', 12, 'red', true));
+    expect(slot.cards.length).toBe(2);
+  });
+  // Không cho phép thêm 1 lá bài úp khi lá cuối đang mở
+  test('test should not allow add hidden cards when last card is opened', () => {
+    const slot = new Slot();
+    slot.addCard(new Card('A', 13, 'red', false));
+    slot.addCard(new Card('A', 12, 'red', true));
+    expect(slot.cards.length).toBe(1);
+  });
+  // Slot luôn phải có lá ngửa nếu trong slot vẫn còn lá úp
+  test('test should the slot always has the open card', () => {
+    const slot = new Slot();
+    slot.addCard(new Card('A', 13, 'red', true));
+    slot.addCard(new Card('B', 13, 'red', true));
+    slot.addCard(new Card('C', 13, 'red', true));
+    slot.addCard(new Card('D', 13, 'red', false));
+    expect(slot.cards.length).toBe(4);
+
+    slot.removeCard();
+    expect(slot.cards.length).toBe(3);
+    expect(slot.cards[slot.cards.length - 1].hidden).toBe(false);
+  });
 });

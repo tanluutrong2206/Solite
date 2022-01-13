@@ -1,1 +1,1 @@
-describe('Card', () => {});
+describe.skip('Card', () => {});
