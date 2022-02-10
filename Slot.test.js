@@ -115,4 +115,53 @@ describe('Slot', () => {
     expect(slot.cards.length).toBe(3);
     expect(slot.cards[slot.cards.length - 1].hidden).toBe(false);
   });
+
+  // Slot khong cho phep remove nhung la chua mo
+  test('test should the not allow move multi card', () => {
+    const slot = new Slot();
+    slot.addCard(new Card('A', 13, 'red', true));
+    slot.addCard(new Card('B', 13, 'red', true));
+    slot.addCard(new Card('C', 13, 'red', true));
+    slot.addCard(new Card('D', 13, 'red', false));
+    slot.addCard(new Card('D', 12, 'black', false));
+
+    slot.removeNumberCards(3);
+    expect(slot.cards.length).toBe(5);
+  });
+
+  test('test should remove all open card', () => {
+    const slot = new Slot();
+    slot.addCard(new Card('A', 13, 'red', true));
+    slot.addCard(new Card('B', 13, 'red', true));
+    slot.addCard(new Card('C', 13, 'red', true));
+    slot.addCard(new Card('D', 13, 'red', false));
+    slot.addCard(new Card('D', 12, 'black', false));
+
+    slot.removeNumberCards(2);
+    expect(slot.cards.length).toBe(3);
+  });
+
+  test('test should add all open', () => {
+    const slot = new Slot();
+    cards = [
+      new Card('A', 13, 'red', false),
+      new Card('B', 12, 'black', false),
+    ];
+
+    slot.addCards(cards);
+    expect(slot.cards.length).toBe(2);
+  });
+
+  // cho phep them toan bo card khi slot co san 1 la
+  test('test should add all open when slot had a card', () => {
+    const slot = new Slot();
+    slot.addCard(new Card('B', 13, 'red', true));
+    cards = [
+      new Card('A', 12, 'red', false),
+      new Card('B', 11, 'black', false),
+    ];
+
+    slot.addCards(cards);
+    expect(slot.cards.length).toBe(3);
+  });
 });

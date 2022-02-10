@@ -24,6 +24,12 @@ class Slot {
     }
   }
 
+  addCards(cards) {
+    cards.forEach((card) => {
+      this.addCard(card);
+    });
+  }
+
   removeCard() {
     const card = this.getLastCard();
     if (card && !card.hidden) {
@@ -38,6 +44,12 @@ class Slot {
   }
 
   removeNumberCards(number) {
+    const cardOpens = this.cards.filter((card) => card.hidden === false);
+
+    if (cardOpens.length < number) {
+      return;
+    }
+
     if (this.cards.length > number) {
       this.cards = this.cards.slice(0, this.cards.length - number);
     }
