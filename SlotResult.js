@@ -19,6 +19,10 @@ class SlotResult {
       this.cards.push(card);
     }
   }
+
+  withdraw() {
+    this.cards.pop();
+  }
 }
 
 module.exports = SlotResult;

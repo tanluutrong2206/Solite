@@ -164,4 +164,12 @@ describe('Slot', () => {
     slot.addCards(cards);
     expect(slot.cards.length).toBe(3);
   });
+
+  test('test init slot with card open', () => {
+    const cards = [];
+    cards.push(new Card('B', 7, 'black'));
+    const slot = new Slot(cards);
+
+    expect(slot.cards.length).toBe(1);
+  });
 });

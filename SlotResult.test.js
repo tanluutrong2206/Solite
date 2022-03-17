@@ -22,7 +22,7 @@ describe('Slot result', () => {
     expect(slot.cards.length).toBe(1);
   });
 
-  //  ko Cho them 1 the khi trong slot có con xì
+  //  khong the them card khi lớn hơn 2
   test('should  not allow add 1 card s better than before carduccessful', () => {
     const slot = new SlotResult();
     slot.add(new Card('A', 1, 'red'));
@@ -48,7 +48,7 @@ describe('Slot result', () => {
     expect(slot.cards.length).toBe(1);
   });
 
-  //  Khong them the khi the moi khac loai
+  //  Khong them the khi the moi khác loai
   test('should not add card when new card in other type with previous', () => {
     const slot = new SlotResult();
     slot.add(new Card('A', 1, 'red'));
@@ -57,19 +57,35 @@ describe('Slot result', () => {
     expect(slot.cards.length).toBe(1);
   });
 
-  // Khong the them the vao o trong khi con goi y chua mo
+  // Khong the them card khi con goi y chua mo
   test('should not allow add card hidden', () => {
     const slot = new SlotResult();
     slot.add(new Card('A', 1, 'red', (hidden = true)));
 
     expect(slot.cards.length).toBe(0);
   });
-  // khong the them card vao o khi con goi y cung mau cung loai nhung chua mo
+  // khong the them card khi cung màu + cung loại + chua mở
   test('should not allow add card hidden1', () => {
     const slot = new SlotResult();
     slot.add(new Card('A', 1, 'red'));
     slot.add(new Card('A', 2, 'red', true));
 
     expect(slot.cards.length).toBe(1);
+  });
+
+  // chỉ có thể rút lá bài cuối cùng ra khỏi slot
+  test('should allow to withdraw last card', () => {
+    const slot = new SlotResult();
+    slot.add(new Card('A', 1, 'red'));
+    slot.add(new Card('A', 2, 'red'));
+    slot.add(new Card('A', 3, 'red'));
+    slot.add(new Card('A', 4, 'red'));
+
+    slot.withdraw();
+
+    expect(slot.cards.length).toBe(3);
+
+    const lastCard = slot.cards[slot.cards.length - 1];
+    expect(lastCard.value).toBe(3);
   });
 });

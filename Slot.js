@@ -1,6 +1,6 @@
 class Slot {
-  constructor() {
-    this.cards = [];
+  constructor(cards = []) {
+    this.cards = cards;
   }
 
   addCard(card) {
